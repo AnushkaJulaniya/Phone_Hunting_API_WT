@@ -10,6 +10,17 @@ const phnDetailsDiv = document.querySelector(".phnDetailsDiv");
 const API = "https://openapi.programming-hero.com/api/phones?search="  ;
 const DETAILS_API = "https://openapi.programming-hero.com/api/phone/";
 
+
+
+async  function iphoneData () {
+  const data = await fetch("https://openapi.programming-hero.com/api/phones?search=13 ");
+  const result = await data.json();
+  displayPhone(result.data);
+}
+iphoneData();
+
+
+
 searchBtn.addEventListener("click", searchPhone);
 
  async function searchPhone(){
@@ -24,6 +35,10 @@ searchBtn.addEventListener("click", searchPhone);
    
     fetchPhoneAPI(API_URL);
 }
+
+// 1. fun fetchData () {13}
+// func displayData(data)
+// 3. ${} displayData(data)
 
 async function fetchPhoneAPI(API_URL){
 try{
@@ -65,6 +80,8 @@ try{
 
        showDetails.addEventListener("click", ()=>{
         fetchPhoneDetails(obj.slug);
+       
+        document.body.classList.add("no-scroll");
        });
 
        parent.append(phnImage , phoneName , phnDetails , showDetails);
@@ -112,6 +129,7 @@ try{
   
   closeBtn.addEventListener("click", ()=>{
     detailsContainer.remove();
+    document.body.classList.remove("no-scroll");
   });
  
 
